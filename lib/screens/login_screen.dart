@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yolo/screens/order_screen.dart';
+import 'package:yolo/services/location_service.dart';
+import 'package:geolocator/geolocator.dart';
+import 'dart:io' show Platform;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -13,12 +16,81 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
+  bool _locationPermissionRequested = false;
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize state
+  }
+
+  void _showLocationPermissionDialog() async {
+    bool? result = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Location Permission Required'),
+          content: const Text(
+              'This app needs location access to track your deliveries and provide accurate navigation. '
+              'Please allow location permission to continue.'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+            TextButton(
+              child: const Text('Allow'),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ],
+        );
+      },
+    );
+
+    if (result == true) {
+      await _requestLocationPermission();
+    }
+    
+    // Navigate to order screen regardless of permission result
+    _navigateToOrderScreen();
+  }
+
+  Future<void> _requestLocationPermission() async {
+    LocationService locationService = LocationService();
+    bool hasPermission = await locationService.handleLocationPermission();
+    
+    if (!hasPermission) {
+      // Show a message if permission was denied
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Location permission is required for this app to function properly'),
+            backgroundColor: Colors.orange,
+          ),
+        );
+      }
+    }
+  }
+
+  void _navigateToOrderScreen() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const OrderScreen(),
+      ),
+    );
   }
 
   void _login() async {
@@ -33,13 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
       // Check credentials
       if (_emailController.text == 'driver@yolo.com' &&
           _passwordController.text == 'password123') {
-        // Navigate to order screen
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const OrderScreen(),
-          ),
-        );
+        // Show location permission dialog before navigating to order screen
+        _showLocationPermissionDialog();
       } else {
         // Show error
         ScaffoldMessenger.of(context).showSnackBar(
@@ -48,11 +115,11 @@ class _LoginScreenState extends State<LoginScreen> {
             backgroundColor: Colors.red,
           ),
         );
+        
+        setState(() {
+          _isLoading = false;
+        });
       }
-
-      setState(() {
-        _isLoading = false;
-      });
     }
   }
 

@@ -296,6 +296,10 @@ class _OrderScreenState extends State<OrderScreen> {
     Position positionToUse = _currentPosition ?? _locationService.mockPosition;
 
     try {
+      print('Attempting to open navigation to restaurant...');
+      print('Current position: ${positionToUse.latitude}, ${positionToUse.longitude}');
+      print('Restaurant position: ${_order.restaurant.lat}, ${_order.restaurant.lng}');
+      
       await NavigationService.openGoogleMapsDirections(
         positionToUse.latitude,
         positionToUse.longitude,
@@ -320,10 +324,20 @@ class _OrderScreenState extends State<OrderScreen> {
         );
       });
     } catch (e) {
+      String errorMessage = e.toString();
+      print('Navigation error: $errorMessage'); // Debug log
+      
+      if (errorMessage.contains('Could not open Google Maps')) {
+        errorMessage = 'Could not open Google Maps. Please make sure Google Maps is installed and location services are enabled.';
+      } else {
+        errorMessage = 'Error opening navigation: $errorMessage';
+      }
+      
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Error opening navigation: $e'),
+          content: Text(errorMessage),
           backgroundColor: Colors.red,
+          duration: const Duration(seconds: 5),
         ),
       );
     }
@@ -338,6 +352,10 @@ class _OrderScreenState extends State<OrderScreen> {
     Position positionToUse = _currentPosition ?? _locationService.mockPosition;
 
     try {
+      print('Attempting to open navigation to customer...');
+      print('Current position: ${positionToUse.latitude}, ${positionToUse.longitude}');
+      print('Customer position: ${_order.customer.lat}, ${_order.customer.lng}');
+      
       await NavigationService.openGoogleMapsDirections(
         positionToUse.latitude,
         positionToUse.longitude,
@@ -362,10 +380,20 @@ class _OrderScreenState extends State<OrderScreen> {
         );
       });
     } catch (e) {
+      String errorMessage = e.toString();
+      print('Navigation error: $errorMessage'); // Debug log
+      
+      if (errorMessage.contains('Could not open Google Maps')) {
+        errorMessage = 'Could not open Google Maps. Please make sure Google Maps is installed and location services are enabled.';
+      } else {
+        errorMessage = 'Error opening navigation: $errorMessage';
+      }
+      
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Error opening navigation: $e'),
+          content: Text(errorMessage),
           backgroundColor: Colors.red,
+          duration: const Duration(seconds: 5),
         ),
       );
     }
@@ -529,7 +557,7 @@ class _OrderScreenState extends State<OrderScreen> {
           // Main content
           SingleChildScrollView(
             padding:
-                const EdgeInsets.only(top: 80, left: 16, right: 16, bottom: 16),
+                const EdgeInsets.only(top: 90, left: 16, right: 16, bottom: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -1029,7 +1057,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
+                padding: const EdgeInsets.only(top: 25, left: 16, right: 16),
                 child: Row(
                   children: [
                     // Heading with constrained width to prevent overflow
