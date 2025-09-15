@@ -10,35 +10,84 @@ class OrderStatusWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final statusInfo = _getStatusInfo(orderStatus);
 
-    return Card(
-      color: statusInfo.color.withOpacity(0.1),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: statusInfo.color.withOpacity(0.3),
+          width: 2,
+        ),
+      ),
       child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
-                Icon(
-                  statusInfo.icon,
-                  color: statusInfo.color,
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  statusInfo.title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: statusInfo.color.withOpacity(0.1),
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: statusInfo.color,
+                      width: 2,
+                    ),
+                  ),
+                  child: Icon(
+                    statusInfo.icon,
                     color: statusInfo.color,
+                    size: 28,
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        statusInfo.title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: statusInfo.color,
+                          fontFamily: 'NeuePowerTrial',
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      const Text(
+                        'Status Update',
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          fontFamily: 'NeueMontreal',
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 8),
-            Text(
-              statusInfo.description,
-              style: const TextStyle(
-                color: Colors.grey,
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: statusInfo.color.withOpacity(0.05),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: statusInfo.color.withOpacity(0.2),
+                ),
+              ),
+              child: Text(
+                statusInfo.description,
+                style: const TextStyle(
+                  color: Colors.black87,
+                  fontSize: 16,
+                  height: 1.5,
+                  fontFamily: 'NeueMontreal',
+                ),
               ),
             ),
           ],
@@ -53,7 +102,7 @@ class OrderStatusWidget extends StatelessWidget {
       case OrderStatus.assigned:
         return (
           title: 'Order Assigned',
-          description: 'Your order has been assigned. Tap "Start Trip" to begin.',
+          description: 'Your order has been assigned. Tap "Start Trip" to begin your delivery.',
           icon: Icons.assignment,
           color: Colors.blue
         );

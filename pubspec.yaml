@@ -67,6 +67,55 @@ flutter:
     # Logo and images
     - assets/images/
     
-  # Use system fonts only as per requirements
-  # Fonts are provided in assets but not declared here
-  # as per the requirement to use system fonts only
+  # Declare custom fonts from assets
+  fonts:
+    - family: NeueMontreal
+      fonts:
+        - asset: assets/fonts/NeueMontreal-Regular.otf
+        - asset: assets/fonts/NeueMontreal-Italic.otf
+          style: italic
+        - asset: assets/fonts/NeueMontreal-Bold.otf
+          weight: 700
+        - asset: assets/fonts/NeueMontreal-BoldItalic.otf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/NeueMontreal-Light.otf
+          weight: 300
+        - asset: assets/fonts/NeueMontreal-LightItalic.otf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/NeueMontreal-Medium.otf
+          weight: 500
+        - asset: assets/fonts/NeueMontreal-MediumItalic.otf
+          weight: 500
+          style: italic
+    - family: NeuePowerTrial
+      fonts:
+        - asset: assets/fonts/NeuePowerTrial-Regular.ttf
+        - asset: assets/fonts/NeuePowerTrial-RegularOblique.ttf
+          style: italic
+        - asset: assets/fonts/NeuePowerTrial-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/NeuePowerTrial-BoldOblique.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/NeuePowerTrial-Light.ttf
+          weight: 300
+        - asset: assets/fonts/NeuePowerTrial-LightOblique.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/NeuePowerTrial-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/NeuePowerTrial-MediumOblique.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/NeuePowerTrial-Heavy.ttf
+          weight: 800
+        - asset: assets/fonts/NeuePowerTrial-HeavyOblique.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/NeuePowerTrial-Ultra.ttf
+          weight: 900
+        - asset: assets/fonts/NeuePowerTrial-UltraOblique.ttf
+          weight: 900
+          style: italic

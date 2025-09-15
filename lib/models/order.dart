@@ -4,6 +4,7 @@ class Order {
   final Customer customer;
   final double amount;
   final OrderStatus status;
+  final DateTime? deliveredTime; // For order history
 
   Order({
     required this.orderId,
@@ -11,6 +12,7 @@ class Order {
     required this.customer,
     required this.amount,
     this.status = OrderStatus.assigned,
+    this.deliveredTime,
   });
 
   Order copyWith({
@@ -19,6 +21,7 @@ class Order {
     Customer? customer,
     double? amount,
     OrderStatus? status,
+    DateTime? deliveredTime,
   }) {
     return Order(
       orderId: orderId ?? this.orderId,
@@ -26,6 +29,7 @@ class Order {
       customer: customer ?? this.customer,
       amount: amount ?? this.amount,
       status: status ?? this.status,
+      deliveredTime: deliveredTime ?? this.deliveredTime,
     );
   }
 }

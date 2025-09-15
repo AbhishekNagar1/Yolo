@@ -9,6 +9,12 @@ A minimal, runnable Flutter (null-safety) driver app that simulates a food-deliv
 - Enforce geofence: allow pickup/delivery only when driver is within 50m
 - Update and display driver location every 10s (printed to console as "sent to server")
 
+## Bonus Features
+
+- Order history screen after delivery
+- Simple notification simulation (in-app banners and snack bars)
+- Map preview thumbnail (using Google Maps URLs)
+
 ## Branding
 
 - App Name: Yolo
@@ -53,12 +59,13 @@ lib/
 │   └── order.dart         # Order, Restaurant, Customer models
 ├── screens/               # UI screens
 │   ├── login_screen.dart  # Login screen
-│   └── order_screen.dart  # Order details and flow screen
+│   ├── order_screen.dart  # Order details and flow screen
+│   └── order_history_screen.dart  # Order history screen
 ├── services/              # Business logic
 │   ├── location_service.dart   # Location tracking and geofence
-│   └── navigation_service.dart # Google Maps integration
+│   ├── navigation_service.dart # Google Maps integration
+│   └── notification_service.dart # Notification system
 └── widgets/               # Custom widgets
-    ├── yolo_logo.dart     # YOLO logo widget
     └── order_status_widget.dart # Order status display
 ```
 
@@ -98,3 +105,4 @@ To test on an Android emulator:
 - [x] pubspec.yaml clearly organized (logo + future asset dirs + system fonts)
 - [x] Clean repo history + README + comments
 - [x] UI consistent with YOLO branding (logo, white bg and that provided color gradient txt)
+- [x] Bonus features implemented (order history, notifications)

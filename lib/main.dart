@@ -16,6 +16,42 @@ class YoloDriverApp extends StatelessWidget {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'NeuePowerTrial', // Primary font as specified
+        textTheme: const TextTheme(
+          displayLarge: TextStyle(fontFamily: 'NeuePowerTrial'),
+          displayMedium: TextStyle(fontFamily: 'NeuePowerTrial'),
+          displaySmall: TextStyle(fontFamily: 'NeuePowerTrial'),
+          headlineLarge: TextStyle(fontFamily: 'NeuePowerTrial'),
+          headlineMedium: TextStyle(fontFamily: 'NeuePowerTrial'),
+          headlineSmall: TextStyle(fontFamily: 'NeuePowerTrial'),
+          titleLarge: TextStyle(fontFamily: 'NeuePowerTrial'),
+          titleMedium: TextStyle(fontFamily: 'NeuePowerTrial'),
+          titleSmall: TextStyle(fontFamily: 'NeuePowerTrial'),
+          bodyLarge: TextStyle(fontFamily: 'NeueMontreal'),
+          bodyMedium: TextStyle(fontFamily: 'NeueMontreal'),
+          bodySmall: TextStyle(fontFamily: 'NeueMontreal'),
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF4CAF50),
+          foregroundColor: Colors.white,
+          titleTextStyle: TextStyle(
+            fontFamily: 'NeuePowerTrial',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(0xFF4CAF50),
+            foregroundColor: Colors.white,
+            textStyle: const TextStyle(
+              fontFamily: 'NeuePowerTrial',
+              fontWeight: FontWeight.bold,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+        ),
       ),
       home: const LoginScreen(),
       debugShowCheckedModeBanner: false,

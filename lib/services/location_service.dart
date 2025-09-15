@@ -15,7 +15,7 @@ class LocationService {
   double _mockLng = 77.2090;
 
   // Check if location services are enabled
-  Future<bool> _handleLocationPermission() async {
+  Future<bool> handleLocationPermission() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -41,12 +41,6 @@ class LocationService {
 
   // Get current location
   Future<Position?> getCurrentLocation() async {
-    bool hasPermission = await _handleLocationPermission();
-    if (!hasPermission) {
-      // Return null when no permission, let the UI handle mock location
-      return null;
-    }
-
     try {
       _currentPosition = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
